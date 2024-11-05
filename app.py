@@ -3,65 +3,45 @@ import pdfplumber
 import random
 import docx
 
-def roast_resume(extracted_text, used_roasts):
-    roasts = []
+used_roasts = set()
 
-    # A list of humorous roasts based on specific keywords
-    contextual_roasts = []
-    if 'leadership' in extracted_text.lower():
-        contextual_roasts.append("Your leadership skills seem more like a suggestion than a requirement! 😅")
-    if 'team player' in extracted_text.lower():
-        contextual_roasts.append("I hope you're not just a team player; we need a team leader! 🏆")
-    if 'self-motivated' in extracted_text.lower():
-        contextual_roasts.append("Self-motivated? More like self-medicating! 💊")
-    if 'dynamic' in extracted_text.lower():
-        contextual_roasts.append("Dynamic? This is as dynamic as the 'dandiya' dance at Garba—lots of spinning but going nowhere! 💃")
-    if 'problem solver' in extracted_text.lower():
-        contextual_roasts.append("If you’re such a problem solver, why does your resume look like the plot twist in a typical Bollywood drama? 🎬")
-    if 'detail-oriented' in extracted_text.lower():
-        contextual_roasts.append("Detail-oriented? This looks like a Rangoli made by a toddler—more mess than design! 🎨")
-    if 'hardworking' in extracted_text.lower():
-        contextual_roasts.append("Hardworking? I see more effort in finding excuses to skip work than in actually working! 😅")
-    if 'creative' in extracted_text.lower():
-        contextual_roasts.append("Creative? This is as creative as remaking a classic movie—same old, just in a new wrapper! 🎥")
-    if 'go-getter' in extracted_text.lower():
-        contextual_roasts.append("Go-getter? More like go-get-the-remote-and-watch memes instead! 🍿")
-    if 'communication skills' in extracted_text.lower():
-        contextual_roasts.append("Communication skills? Your messages are as clear as a meme with no context! 📜")
-    if 'passionate' in extracted_text.lower():
-        contextual_roasts.append("Passionate? The only passion I see is for eating during festivals! 🍬")
-    if 'analytical' in extracted_text.lower():
-        contextual_roasts.append("Analytical? This analysis is as confusing as deciphering a bad roast! 🤔")
-    if 'innovative' in extracted_text.lower():
-        contextual_roasts.append("Innovative? This is about as innovative as a reused meme format! 🔄")
-    if 'motivated' in extracted_text.lower():
-        contextual_roasts.append("Motivated? The only thing you’re motivated to do is watch viral videos! 🎥")
-    if 'dedicated' in extracted_text.lower():
-        contextual_roasts.append("Dedicated? If this is dedication, I'd hate to see your procrastination during exams! 📚")
-    if 'strategic' in extracted_text.lower():
-        contextual_roasts.append("Strategic? This is as well-planned as a last-minute Holi celebration! 🎉")
-    if 'results' in extracted_text.lower():
-        contextual_roasts.append("Results-oriented? The only results I see are from your failed cooking experiments! 🍳")
-    if 'collaborative' in extracted_text.lower():
-        contextual_roasts.append("Collaborative? This is as cooperative as a cast of a multi-starrer fighting for screen time! 🎭")
+def roast_resume():
+    # List of humorous roasts, including Indian meme references
+    roasts = [
+        "This resume reads like a script for a low-budget soap opera—lots of drama, but no real plot!",
+        "I didn’t know resumes came with a side of cringeworthy clichés—this one’s a buffet!",
+        "If this resume were a dish, it would be a mystery meat casserole—no one knows what’s in it, and everyone’s afraid to try it!",
+        "This resume is like a GPS with no signal—just lost in the wilderness!",
+        "Your experience section is like a magician's trick—now you see it, now you don’t!",
+        "If this resume had a face, it would be the 'before' picture in a makeover show!",
+        "This resume is so unoriginal, even Google couldn’t autocomplete it!",
+        "Reading this resume is like watching paint dry—tedious and without excitement!",
+        "If your achievements were any less impressive, they’d be hiding in the corner at a party!",
+        "This resume is like a sitcom without a laugh track—awkward and a little uncomfortable!",
+        "The skills section here is like a salad—mostly filler, with just a few croutons of actual substance!",
+        "This resume could be the poster child for 'how to bore your potential employer to death!'",
+        "This looks like a group project where everyone contributed, but nobody cared about the final product!",
+        "Your resume is like a bad haircut—it’s just trying too hard and completely misses the mark!",
+        "If you put as much effort into this resume as you do into avoiding hard work, you'd be CEO by now!",
+        
+        # Indian meme-inspired roasts
+        "This resume is as confusing as a Bollywood plot twist—where did the character development go?",
+        "If your resume was a chai, it would be missing the masala—just plain and boring!",
+        "This resume looks like it was written by a person who learned English from watching Bollywood movies—lots of drama, no clarity!",
+        "Your resume is like a cricket match that never ends—so much time wasted for such little result!",
+        "This resume is like a long line at the local darshini—everyone’s waiting, but nobody’s getting anything done!",
+        "Reading this is like watching the 'Kuch Kuch Hota Hai' climax—everyone’s confused and no one knows what happened!",
+        "Your achievements are like my neighbor's noisy family—everyone knows they exist, but nobody really cares!",
+        "This resume is as relatable as a 'Yeh Hai Mohabbatein' episode—too much melodrama and not enough sense!",
+        "If this resume were an Indian meme, it would definitely be a 'Why this kolaveri di?' moment!",
+        "This looks like the 'first draft' of a Karan Johar movie script—too much fluff, not enough substance!",
+        "This resume is like the plot of 'Gully Boy'—great concept, but the execution is all over the place!"
+    ]
 
-    # If no contextual roasts were added, add generic roasts
-    if not contextual_roasts:
-        roasts.extend([
-            "This resume is so bland, it could put a coffee addict to sleep! ☕",
-            "This resume is so generic, it could be the next viral meme template! 😂"
-        ])
-    else:
-        roasts.extend(contextual_roasts)
+    # Select a random roast
+    selected_roast = random.choice(roasts)
+    return selected_roast
 
-    # Select a roast that hasn't been used yet
-    available_roasts = list(set(roasts) - used_roasts)
-    if available_roasts:
-        selected_roast = random.choice(available_roasts)
-        used_roasts.add(selected_roast)
-        return selected_roast
-    else:
-        return "You've run out of roasts! Try again later! 😂"
 
 def check_ats_score(extracted_text):
     keywords = [
@@ -239,8 +219,8 @@ if uploaded_file is not None:
             for paragraph in doc.paragraphs:
                 extracted_text += paragraph.text + "\n"
 
-        used_roasts = set()
-        roast = roast_resume(extracted_text, used_roasts)
+        used_roasts = set()  # Reset used roasts when a new file is uploaded
+        roast = roast_resume()  # Call the function without arguments
 
         # Displaying the roast in a styled box
         st.markdown('<div class="macbook-box"><p class="roast-text">{}</p></div>'.format(roast), unsafe_allow_html=True)
